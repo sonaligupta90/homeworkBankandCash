@@ -1,6 +1,5 @@
 package steps;
 
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import io.cucumber.java.Before;
@@ -70,6 +69,7 @@ public class LoginStepDefination extends TestBase{
 		String ExpectedTitle = "Dashboard- iBilling";
 		String ActualTitle =driver.getTitle();
 		Assert.assertEquals(ExpectedTitle, ActualTitle);
+		takeScreenShot(driver);
 	   
 	}
 	@When("^User enters \"([^\"]*)\" in the \"([^\"]*)\" field in accounts page$")
@@ -107,6 +107,12 @@ public class LoginStepDefination extends TestBase{
 		String ExpectedTitle = "Accounts- iBilling";
 		String ActualTitle =driver.getTitle();
 		Assert.assertEquals(ExpectedTitle, ActualTitle);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		takeScreenShot(driver);
 	  
 	}
 

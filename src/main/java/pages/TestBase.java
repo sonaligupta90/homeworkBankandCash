@@ -1,9 +1,17 @@
 package pages;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -32,9 +40,19 @@ public class TestBase {
 		return int_random;
 		}
 	
-	public void teardown() {
-		driver.close();
-		driver.quit();
+	public void takeScreenShot(WebDriver driver) {
+		TakesScreenshot ts =(TakesScreenshot)driver ;
+		try {
+			SimpleDateFormat formatter = new SimpleDateFormat("MMddyy_HHmmss");
+			Date date = new Date();
+			String label =  formatter.format(date);
+			
+			FileUtils.copyFile(ts.getScreenshotAs(OutputType.FILE), new File(System.getProperty("user.dir")+("/screenshot/")+label+".png"));
+		} catch (WebDriverException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 		
 	}
